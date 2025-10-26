@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AIEnhancedTradeUi from "@/pages/pro-tool/aIEnhancedTradeUi.tsx";
-import TradingHubDisplay from "@/pages/trading-hub/trading-hub-display.tsx";
+import AIEnhancedTradeUi from "./pages/pro-tool/aIEnhancedTradeUi.tsx";
+import TradingHubDisplay from "./pages/trading-hub/trading-hub-display.tsx";
 import "./display-toggle.scss";
 
 const Analysis: React.FC = () => {

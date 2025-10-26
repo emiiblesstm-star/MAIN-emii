@@ -7,8 +7,8 @@ import {
   generateDerivApiInstance,
   V2GetActiveClientId,
   V2GetActiveToken,
-} from "@deriv/external/bot-skeleton/services/api/appId"
-import { useStore } from "@deriv/hooks/useStore"
+} from "@deriv/bot-skeleton/services/api/appId"
+import { useStore } from "@deriv/stores"
 import "./aIEnhancedTradeUi.scss"
 
 // AI Trading Types

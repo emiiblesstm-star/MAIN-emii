@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import TradingHubDisplay from "./trading-hub-display";
-import AdvancedDisplay from "@/components/trading-hub/advanced-display.tsx";
+import AdvancedDisplay from "./trading-hub/advanced-display.tsx";
 import "./display-toggle.scss";
 
 const Analysiss: React.FC = () => {

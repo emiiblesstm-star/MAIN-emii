@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ProTool from "@/pages/pro-tool/pro-tool.tsx";
-import ProTrader from "@/pages/pro-tool/pro-trader.tsx";
+import ProTool from "./pages/pro-tool/pro-tool.tsx";
+import ProTrader from "./pages/pro-tool/pro-trader.tsx";
 import "./display-toggle.scss";
 
 const DisplayToggle: React.FC = () => {

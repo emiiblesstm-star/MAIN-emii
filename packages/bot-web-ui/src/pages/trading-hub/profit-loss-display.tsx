@@ -2,7 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 import classNames from 'classnames';
 import { Money } from '@deriv-com/ui';
-import { useStores } from '@/hooks';
+import { useStores } from '@deriv/stores';
 
 const ProfitLossDisplay = observer(() => {
     const { transactions } = useStores();

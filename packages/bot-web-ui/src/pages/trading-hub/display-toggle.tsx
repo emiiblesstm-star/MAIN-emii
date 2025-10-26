@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AIEnhancedTradeUisignal from "@/pages/pro-tool/aIEnhancedTradeUisignal.tsx";
+import AIEnhancedTradeUisignal from "./pages/pro-tool/aIEnhancedTradeUisignal.tsx";
 import "./display-toggle.scss";
 
 // Simple iframe components for AI and Analysis

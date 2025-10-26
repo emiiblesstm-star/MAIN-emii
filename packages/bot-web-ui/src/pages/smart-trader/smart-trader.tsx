@@ -10,7 +10,7 @@ import {
   V2GetActiveToken,
 } from "@deriv/bot-skeleton/services/api/appId"
 import { contract_stages } from "./constants/contract-stage"
-import { useStore } from "@deriv/useStore"
+import { useStore } from "@deriv/stores"
 import "./smart-trader.scss"
 
 // Minimal trade types we will support initially
