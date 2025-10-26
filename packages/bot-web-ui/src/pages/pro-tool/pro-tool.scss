@@ -1,0 +1,1142 @@
+/* Optimized SCSS with dark theme and performance improvements */
+
+.pro-trader {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  padding: 1rem;
+  color: #e2e8f0;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #0a0a0f;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  max-height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    max-height: calc(100vh - 2rem);
+  }
+
+  &.one-column { 
+    max-width: 980px; 
+  }
+
+  /* Enhanced scrollable container */
+  &.scrollable-container {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+    /* Custom scrollbar styling */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 4px;
+      
+      &:hover {
+        background: #64748b;
+      }
+    }
+  }
+
+  h1 { margin: 0.5rem 0 0.75rem 0; font-size: 1.25rem; font-weight: 600; }
+}
+
+/* top controls: volatility select + top buttons on same row */
+.top-controls {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+
+  .volatility-select {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    label { font-size: 0.9rem; color: #cbd5e1; }
+    select {
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: rgba(30, 41, 59, 0.8);
+      color: #e2e8f0;
+      width: 320px;
+      max-width: calc(100vw - 220px);
+      
+      &:focus {
+        border-color: #1E90FF;
+        box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+      }
+    }
+  }
+
+  /* Auto-switch button styling */
+  .auto-switch-control {
+    display: flex;
+    align-items: center;
+    
+    .btn-switch {
+      background: #475569;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      border: 1px solid #475569;
+      
+      &.active {
+        background: #10b981;
+        border-color: #10b981;
+        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+      }
+      
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+/* Desktop layout - all sections in one row */
+@media (min-width: 1200px) {
+  .pro-trader.one-column {
+    max-width: 100%;
+    padding: 1rem 2rem;
+  }
+
+  .top-controls {
+    flex-wrap: nowrap;
+    gap: 1rem;
+    
+    .volatility-select select {
+      width: 280px;
+    }
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  .circles-section {
+    grid-column: 1 / -1;
+  }
+
+  .tp-sl-section {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    
+    .tp-input, .sl-input, .martingale-input, .jet-mode-input {
+      flex: 1;
+      max-width: 200px;
+    }
+    
+    .status-line {
+      flex: 1 1 100%;
+    }
+  }
+
+  .recovery-section {
+    grid-column: 1 / -1;
+  }
+
+  .trade-grid.one-col {
+    grid-column: 1 / -1;
+  }
+}
+
+/* circles & layout */
+.circles-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+
+  .circles-header {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.95rem;
+    color: #e2e8f0;
+  }
+
+  .circles-panel {
+    background: rgba(30, 41, 59, 0.8);
+    padding: 0.6rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(15,23,42,0.15);
+    border: 1px solid rgba(30, 144, 255, 0.2);
+    min-height: 220px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 140px;
+    overflow: visible;
+
+    .circles-panel-inner {
+      width: 100%;
+      max-width: 740px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+  }
+
+  .after-circles { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 1rem; 
+    flex-wrap: wrap; 
+  }
+
+  .circles-legend {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #94a3b8;
+
+    .legend-item { display: flex; gap: 6px; align-items: center; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .dot.high { background: #06b6d4; }
+    .dot.low { background: #f97316; }
+  }
+
+  .debug-row { 
+    margin-top: 6px; 
+    font-size: 0.82rem; 
+    
+    code { 
+      background: #1e293b; 
+      padding: 3px 8px; 
+      border-radius: 4px; 
+      color: #e2e8f0;
+    } 
+  }
+}
+
+/* New circles buttons section */
+.circles-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  
+  .btn-auto {
+    background: #06b6d4;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 160px;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    
+    &:hover {
+      background: #0891b2;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(6, 182, 212, 0.3);
+    }
+    
+    &.active {
+      background: #ef4444;
+      
+      &:hover {
+        background: #dc2626;
+        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+      }
+    }
+  }
+  
+  .btn-primary {
+    background: #0ea5a4;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 160px;
+    border: 1px solid rgba(14, 165, 164, 0.3);
+    
+    &:hover:not(:disabled) {
+      background: #0d9488;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(14, 165, 164, 0.3);
+    }
+    
+    &:disabled {
+      background: #475569;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+}
+
+// Responsive design for mobile - CHANGED: Keep buttons in one row on mobile
+@media (max-width: 768px) {
+  .circles-buttons {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    
+    .btn-auto,
+    .btn-primary {
+      flex: 1;
+      min-width: 140px;
+      max-width: 200px;
+    }
+  }
+}
+
+.circles-wrap { 
+  position: relative; 
+  padding: 2px 6px; 
+  overflow: hidden; 
+}
+
+.circles-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(56px, 1fr));
+  column-gap: 8px;
+  row-gap: 18px;
+  gap: 8px;
+  align-items: center;
+  justify-items: center;
+}
+
+.digit-circle {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 88px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .15s ease;
+  user-select: none;
+  padding: 0;
+  background: transparent;
+
+  &:hover { transform: translateY(-2px); }
+
+  .circle-svg { width: 100%; height: 100%; display: block; }
+  .circle-bg { fill: transparent; stroke: rgba(30, 144, 255, 0.1); stroke-width: 8; opacity: 0.95; }
+  .circle-arc { 
+    fill: none; 
+    stroke: #6366f1; 
+    stroke-width: 8; 
+    transform-origin: center; 
+    stroke-linecap: round; 
+    transition: stroke .2s ease, stroke-dasharray .3s ease; 
+  }
+  &.is-current .circle-arc { 
+    stroke: #06b6d4; 
+    stroke-width: 9; 
+  }
+
+  .svg-digit { 
+    font-size: 20px; 
+    font-weight: 700; 
+    fill: #e2e8f0; 
+    dominant-baseline: middle; 
+    text-anchor: middle; 
+    pointer-events: none; 
+  }
+  .svg-pct { 
+    font-size: 12px; 
+    fill: #94a3b8; 
+    dominant-baseline: middle; 
+    text-anchor: middle; 
+    pointer-events: none; 
+  }
+
+  .circle-arc.max { stroke: #06b6d4; }
+  .circle-arc.min { stroke: #f97316; }
+}
+
+.digit-circle.is-current {
+  transform: scale(1.05) translateY(-1px);
+  z-index: 5;
+}
+
+.circle-indicator {
+  position: absolute;
+  width: 20px;
+  height: 16px;
+  transition: left 0.12s ease, top 0.12s ease, opacity 0.1s ease;
+  pointer-events: none;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .triangle {
+    width: 0;
+    height: 0;
+    display: block;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 12px solid #0ea5a4;
+  }
+}
+
+/* Enhanced TP/SL section with martingale and UPDATED jet mode */
+.tp-sl-section {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+
+  .tp-input, .sl-input, .martingale-input, .jet-mode-input { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.25rem; 
+    flex: 1 1 220px; 
+    min-width: 140px; 
+  }
+  
+  label { font-size: 0.9rem; color: #cbd5e1; }
+  input { 
+    padding: 0.45rem; 
+    border-radius: 8px; 
+    border: 1px solid #334155; 
+    background: rgba(30, 41, 59, 0.8);
+    color: #e2e8f0;
+    width: 100%; 
+    
+    &:focus {
+      border-color: #1E90FF;
+      box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+    }
+  }
+
+  .status-line { 
+    margin-top: 6px; 
+    color: #10b981; 
+    font-weight: 600; 
+    width: 100%; 
+  }
+
+  .compact { max-width: 180px; min-width: 120px; }
+
+  /* UPDATED: Jet Mode box styling */
+  .jet-mode-box {
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 8px;
+    text-align: center;
+    transition: all 0.2s ease;
+    
+    &.jet-on {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.05);
+      
+      .jet-toggle-btn {
+        background: #ef4444;
+        color: white;
+      }
+      
+      .jet-mode-info {
+        color: #ef4444;
+        font-weight: 600;
+      }
+    }
+    
+    &.jet-off {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.05);
+      
+      .jet-toggle-btn {
+        background: #10b981;
+        color: white;
+      }
+      
+      .jet-mode-info {
+        color: #10b981;
+        font-weight: 600;
+      }
+    }
+    
+    .jet-toggle-btn {
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      width: 100%;
+      
+      &:hover:not(:disabled) {
+        transform: translateY(-1px);
+      }
+      
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+    
+    .jet-mode-info {
+      font-size: 0.75rem;
+      margin-top: 4px;
+    }
+  }
+}
+
+/* Recovery mode section styling */
+.recovery-section {
+  background: rgba(254, 243, 199, 0.05);
+  border: 1px solid #fbbf24;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  
+  .recovery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    
+    label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fbbf24;
+    }
+    
+    .btn-recovery {
+      padding: 6px 16px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #ef4444;
+      color: white;
+      
+      &.active {
+        background: #10b981;
+      }
+      
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+  }
+  
+  .recovery-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    
+    .recovery-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      
+      label {
+        font-size: 0.9rem;
+        color: #fbbf24;
+        font-weight: 500;
+      }
+      
+      select, input {
+        padding: 0.5rem;
+        border-radius: 6px;
+        border: 1px solid #fbbf24;
+        background: rgba(30, 41, 59, 0.8);
+        color: #e2e8f0;
+      }
+    }
+    
+    .recovery-info {
+      margin-top: 0.4rem;
+      padding: 0.6rem;
+      background: rgba(251, 191, 36, 0.1);
+      border-radius: 6px;
+      
+      small {
+        font-size: 0.85rem;
+        color: #fbbf24;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+.trade-grid.one-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 0.4rem;
+}
+
+/* NEW: Boxed radio group styling for trade type selection */
+.radio-group-boxed {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+
+  label {
+    flex: 1;
+    text-align: center;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    border: 2px solid #10b981;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+
+    &:hover {
+      background: rgba(5, 150, 105, 0.2);
+      border-color: #059669;
+      transform: translateY(-1px);
+    }
+
+    &.selected {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: #ef4444;
+      color: #ef4444;
+      
+      &:hover {
+        background: rgba(220, 38, 38, 0.2);
+        border-color: #dc2626;
+      }
+    }
+
+    input {
+      display: none;
+    }
+  }
+}
+
+/* trade card + dropdown styling */
+.trade-card {
+  background: rgba(30, 41, 59, 0.8);
+  border-radius: 10px;
+  border: 1px solid rgba(30, 144, 255, 0.2);
+  padding: 0.5rem;
+  min-height: 220px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+
+  .card-header.small {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .header-left {
+      display: flex;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .header-content {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    h3 { margin: 0; font-size: 1rem; color: #e2e8f0; }
+    .icon-wrapper { 
+      width: 34px; 
+      height: 34px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      background: rgba(30, 144, 255, 0.1); 
+      border-radius: 6px; 
+      border: 1px solid rgba(30, 144, 255, 0.2);
+    }
+
+    .trade-type-select {
+      display: flex;
+      align-items: center;
+      select {
+        margin-left: 6px;
+        padding: 6px 8px;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        background: rgba(30, 41, 59, 0.8);
+        color: #e2e8f0;
+        font-size: 0.9rem;
+        
+        &:focus {
+          border-color: #1E90FF;
+          box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+        }
+      }
+    }
+
+    .status-badge { 
+      font-size: 0.8rem; 
+      display: flex; 
+      gap: 0.45rem; 
+      align-items: center; 
+      padding: 0.25rem 0.5rem; 
+      border-radius: 6px; 
+      background: rgba(203, 213, 225, 0.1);
+    }
+    .status-dot { 
+      width: 8px; 
+      height: 8px; 
+      border-radius: 50%; 
+      display: inline-block; 
+    }
+    .status-badge.active .status-dot { background: #10b981; }
+    .status-badge.inactive .status-dot { background: #cbd5e1; color: #94a3b8; }
+  }
+
+  .card-content { 
+    padding: 0.65rem; 
+    display: flex; 
+    flex-direction: column; 
+    gap: .6rem; 
+  }
+
+  .form-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 0.6rem; 
+    
+    small {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-top: 0.25rem;
+      display: block;
+    }
+  }
+  
+  .form-field { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.4rem; 
+    
+    label { 
+      font-size: 0.85rem; 
+      color: #cbd5e1; 
+    } 
+    
+    input[type="number"], select { 
+      padding: 0.45rem; 
+      border-radius: 6px; 
+      border: 1px solid #334155; 
+      background: rgba(30, 41, 59, 0.8);
+      color: #e2e8f0;
+      width: 100%; 
+      
+      &:focus {
+        border-color: #1E90FF;
+        box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.2);
+      }
+    } 
+  }
+
+  .status-footer.small { 
+    margin-top: 0.6rem; 
+    font-size: 0.85rem; 
+    color: #94a3b8; 
+  }
+}
+
+/* Jet Mode status colors */
+.jet-mode-on {
+  color: #ef4444 !important;
+  font-weight: 600;
+}
+
+.jet-mode-off {
+  color: #10b981 !important;
+  font-weight: 600;
+}
+
+/* Header styles */
+.pro-trader__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  .pro-trader__connection-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    .pro-trader__connection-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      
+      &--connected {
+        background: #10b981;
+      }
+    }
+    
+    .pro-trader__connection-text {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+    }
+  }
+  
+  .pro-trader__total-pl {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    .pro-trader__total-pl-label {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    
+    .pro-trader__total-pl-value {
+      font-weight: 700;
+      font-size: 1.1rem;
+      
+      &--positive {
+        color: #10b981;
+      }
+      
+      &--negative {
+        color: #ef4444;
+      }
+    }
+  }
+}
+
+/* Content grid */
+.pro-trader__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pro-trader__panel {
+  &--config {
+    // Left panel styles
+  }
+  
+  &--chart {
+    // Right panel styles
+  }
+}
+
+/* Status display */
+.pro-trader__status {
+  background: rgba(30, 41, 59, 0.8);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: 1px solid rgba(30, 144, 255, 0.2);
+  
+  .pro-trader__status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem 0;
+    
+    .pro-trader__status-label {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    
+    .pro-trader__status-value {
+      color: #e2e8f0;
+      font-weight: 600;
+      font-size: 0.9rem;
+      
+      &--positive {
+        color: #10b981;
+      }
+      
+      &--negative {
+        color: #ef4444;
+      }
+    }
+    
+    &--recovery {
+      .pro-trader__status-value {
+        color: #fbbf24;
+      }
+    }
+  }
+}
+
+/* responsive: on mobile force TP and SL on same line and reduce sizes */
+@media (max-width: 520px) {
+  .circles-grid { 
+    grid-template-columns: repeat(5, minmax(44px, 1fr)); 
+    column-gap: 6px; 
+    row-gap: 18px; 
+  }
+  .digit-circle { max-width: 56px; }
+  .digit-circle .circle-svg { width: 100%; height: 100%; }
+  .svg-digit { font-size: 14px; }
+  .svg-pct { font-size: 10px; }
+  .trade-card { min-height: 160px; }
+  .circles-panel { 
+    padding-bottom: 160px; 
+  }
+
+  .tp-sl-section {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    .tp-input.compact, .sl-input.compact, .martingale-input.compact, .jet-mode-input.compact {
+      max-width: 140px;
+      min-width: 110px;
+    }
+  }
+
+  .top-controls {
+    .volatility-select select { width: 52vw; max-width: none; }
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Mobile adjustments for Over/Under stats */
+  .over-under-stats {
+    .digit-stats-row {
+      gap: 4px !important;
+    }
+    
+    .digit-stat-item {
+      min-width: 28px !important;
+      
+      .digit-label {
+        font-size: 10px !important;
+      }
+      
+      .digit-percentage {
+        font-size: 9px !important;
+      }
+    }
+  }
+  
+  /* Mobile adjustments for radio group boxes */
+  .radio-group-boxed {
+    flex-direction: row;
+    gap: 6px;
+    
+    label {
+      padding: 8px 10px;
+      font-size: 0.85rem;
+      min-height: 40px;
+    }
+  }
+}
+
+/* appended minimal styles for history row and pills */
+.history-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  
+  /* Special styling for Over/Under stats */
+  &.over-under-stats {
+    bottom: 5px;
+    gap: 6px;
+  }
+}
+
+.history-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding: 4px 6px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pill {
+  min-width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffffff;
+  flex: 0 0 auto;
+  padding: 0 8px;
+}
+
+.pill-even { background: #10b981; }
+.pill-odd { background: #ef4444; }
+.pill-empty { background: rgba(15,23,42,0.2); color: rgba(255, 255, 255, 0.35); }
+
+.history-stats {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.stat-evenodd {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+/* New Over/Under digit statistics styling */
+.over-under-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 8px;
+  
+  .over-section, .under-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    
+    .digit-stats-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      
+      .digit-stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        flex: 1;
+        min-width: 32px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 4px;
+        padding: 4px 2px;
+        
+        .digit-label {
+          font-size: 11px;
+          font-weight: 700;
+          color: #e2e8f0;
+        }
+        
+        .digit-percentage {
+          font-size: 10px;
+          color: #cbd5e1;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  
+  .over-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 6px;
+    
+    .digit-stat-item {
+      border: 1px solid #10b981;
+      
+      .digit-percentage {
+        color: #10b981;
+      }
+    }
+  }
+  
+  .under-section {
+    .digit-stat-item {
+      border: 1px solid #ef4444;
+      
+      .digit-percentage {
+        color: #ef4444;
+      }
+    }
+  }
+}
+
+/* Content grid for desktop layout */
+.content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 1200px) {
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  
+  .tp-sl-section,
+  .recovery-section,
+  .trade-grid.one-col {
+    grid-column: 1 / -1;
+  }
+}

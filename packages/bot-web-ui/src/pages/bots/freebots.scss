@@ -1,0 +1,131 @@
+.free-bots {
+    font-family: 'Poppins', sans-serif;
+    padding: 2rem;
+    min-height: 100vh; /* Ensure the container has enough height */
+    
+    &__header {
+        text-align: center;
+        margin-bottom: 2rem;
+
+        h1 {
+            font-size: 2rem;
+            color: #ff8c00;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+        }
+    }
+
+    &__error-message {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f00;
+        margin-bottom: 1rem;
+    }
+
+    &__scroll-container {
+        overflow-x: auto;
+        overflow-y: auto; /* Allow vertical scrolling */
+        max-height: calc(100vh - 6rem); /* Set a max height, subtracting header space */
+        padding: 1rem 0;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .bot-list-container {
+        display: flex;
+        flex-wrap: wrap; /* Allow the cards to wrap horizontally */
+        width: 100%;
+        gap: 1.5rem;
+    }
+
+    &__grid {
+        display: flex; /* Changed from grid to flex for full-width display */
+        justify-content: flex-start; /* Align cards horizontally */
+        gap: 1.5rem;
+        flex-wrap: wrap; /* Wraps to the next line if no more space */
+    }
+
+    &__card {
+        background: #1a1a1a;
+        border: 1px solid #ffa500;
+        border-radius: 5px;
+        padding: 1.5rem;
+        box-shadow: 0 0 4px rgb(255 140 0 / 20%);
+        transition:
+            box-shadow 0.3s ease,
+            transform 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 280px; /* Set fixed width to ensure horizontal display */
+        min-width: 280px; /* Ensure cards do not shrink below this width */
+
+        &:hover {
+            box-shadow: 0 0 12px rgb(255 140 0 / 60%);
+            transform: translateY(-5px);
+        }
+    }
+
+    &__card-icon {
+        font-size: 2rem;
+        color: #ffa500;
+    }
+
+    &__card-content {
+        flex: 1;
+
+        h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        button {
+            background-color: #ffa500;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #ffae42;
+            }
+
+            &.loading {
+                opacity: 0.6;
+                pointer-events: none;
+            }
+        }
+    }
+
+    @media (max-width: 600px) {
+        &__card {
+            width: 100%; /* Stack cards vertically with full width */
+        }
+
+        &__card-icon {
+            align-self: flex-start;
+        }
+
+        &__card-content {
+            width: 100%;
+        }
+    }
+}
