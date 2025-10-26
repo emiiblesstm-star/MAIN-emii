@@ -17,9 +17,8 @@
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    z-index: 1; // Normal z-index, not on top
+    z-index: 1;
 
-    /* Enhanced Background Elements - Full coverage */
     .enhanced-background {
         position: fixed;
         top: 0;
@@ -27,7 +26,7 @@
         width: 100vw;
         height: 100vh;
         pointer-events: none;
-        z-index: -1; // Behind everything
+        z-index: -1;
 
         .grid-background {
             position: absolute;
@@ -104,10 +103,9 @@
         }
     }
 
-    /* Toggle buttons container - Horizontal scroll on mobile */
     .display-toggle {
         position: relative;
-        z-index: 2; // Normal stacking context
+        z-index: 2;
         display: flex;
         justify-content: center;
         gap: 10px;
@@ -140,7 +138,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             color: rgba(255, 255, 255, 0.9);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
@@ -201,7 +199,6 @@
                 }
             }
 
-            /* Active states with different colors */
             &.active-trading {
                 background: linear-gradient(135deg, rgba(30, 144, 255, 0.25), rgba(0, 191, 255, 0.15));
                 border-color: rgba(30, 144, 255, 0.7);
@@ -248,10 +245,9 @@
         }
     }
 
-    /* Content area - 70% width with reduced top gap */
     .display-content {
         position: relative;
-        z-index: 2; // Normal stacking context
+        z-index: 2;
         width: 70%;
         margin: 0 auto;
         background: rgba(13, 17, 28, 0.9);
@@ -280,7 +276,6 @@
             border-radius: 10px;
         }
 
-        /* Iframe containers */
         .iframe-container {
             width: 100%;
             height: 100%;
@@ -304,7 +299,6 @@
     }
 }
 
-/* Animations */
 @keyframes grid-shift {
     0% {
         background-position: 0 0;
@@ -342,23 +336,19 @@
     }
 }
 
-/* Performance optimizations */
-.display-container {
-    * {
-        box-sizing: border-box;
-    }
-
-    .enhanced-background {
-        will-change: transform, opacity;
-        transform: translateZ(0);
-    }
-
-    .display-toggle__button {
-        will-change: transform, box-shadow;
-    }
+.display-container * {
+    box-sizing: border-box;
 }
 
-/* Mobile-specific fixes */
+.display-container .enhanced-background {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+.display-toggle__button {
+    will-change: transform, box-shadow;
+}
+
 @media (max-width: 768px) {
     .display-container {
         padding: 10px 0;
@@ -390,7 +380,6 @@
     }
 }
 
-/* Extra small devices */
 @media (max-width: 480px) {
     .display-container {
         padding: 8px 0;
@@ -402,7 +391,6 @@
     }
 }
 
-/* Ensure full coverage on very large screens */
 @media (min-width: 1920px) {
     .display-container {
         .display-content {
@@ -412,45 +400,28 @@
     }
 }
 
-/* Important: Ensure the component doesn't overlay other content */
 .display-container {
-    /* Remove any fixed positioning that might cause overlaying */
     position: relative !important;
-    
-    /* Ensure it stays in normal document flow */
     overflow: visible;
-    
-    /* Reset any high z-index values that might cause overlaying */
     z-index: 1;
 }
 
-/* If there are any parent containers with high z-index, reset them */
 .display-container * {
-    max-z-index: 10; /* Limit maximum z-index within the component */
+    z-index: 10;
 }
 
-/* Ensure the background doesn't interfere with other components */
 .enhanced-background {
-    /* Keep background behind everything */
     z-index: -1 !important;
-    
-    /* Ensure it doesn't capture clicks */
     pointer-events: none;
 }
 
-/* Make sure content areas don't overlay other page elements */
 .display-content,
 .display-toggle {
-    /* Normal stacking context */
     z-index: auto;
-    
-    /* Ensure they don't escape their container */
     position: relative;
 }
 
-/* If using iframes, ensure they don't overlay */
 .content-iframe {
-    /* Normal iframe behavior */
     z-index: auto;
     position: relative;
 }

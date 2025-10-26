@@ -1,163 +1,427 @@
-.display-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 0 20px;
+// Reset and full coverage
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.display-toggle {
-  display: flex;
-  justify-content: flex-start; /* Changed from center to flex-start */
-  margin-bottom: 1rem;
-  gap: 1rem;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  white-space: nowrap; /* Prevent button text from wrapping */
-  padding-bottom: 10px; /* Space for scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: #6b7280 #e5e7eb;
-  
-  /* Webkit scrollbar styling */
-  &::-webkit-scrollbar {
-    height: 6px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: #e5e7eb;
-    border-radius: 3px;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: #6b7280;
-    border-radius: 3px;
-  }
-  
-  &::-webkit-scrollbar-thumb:hover {
-    background: #4b5563;
-  }
+.display-container {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+    overflow-x: hidden;
+    padding: 15px 0;
+    margin: 0;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    z-index: 1;
+
+    .enhanced-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: -1;
+
+        .grid-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(30, 144, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 144, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-shift 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            .particle {
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: rgba(30, 144, 255, 0.6);
+                border-radius: 50%;
+                animation: float-particle 15s infinite linear;
+
+                @for $i from 1 through 12 {
+                    &:nth-child(#{$i}) {
+                        left: random(100) + 0%;
+                        top: random(100) + 0%;
+                        animation-delay: random(20) + 0s;
+                        animation-duration: 15 + random(15) + 0s;
+                    }
+                }
+            }
+        }
+
+        .corner-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: glow-pulse 8s ease-in-out infinite;
+
+            &--tl {
+                top: -150px;
+                left: -150px;
+                background: radial-gradient(circle, #1E90FF 0%, transparent 70%);
+                animation-delay: 0s;
+            }
+
+            &--tr {
+                top: -150px;
+                right: -150px;
+                background: radial-gradient(circle, #00BFFF 0%, transparent 70%);
+                animation-delay: 2s;
+            }
+
+            &--bl {
+                bottom: -150px;
+                left: -150px;
+                background: radial-gradient(circle, #FF6B6B 0%, transparent 70%);
+                animation-delay: 4s;
+            }
+
+            &--br {
+                bottom: -150px;
+                right: -150px;
+                background: radial-gradient(circle, #4ECDC4 0%, transparent 70%);
+                animation-delay: 6s;
+            }
+        }
+    }
+
+    .display-toggle {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        padding: 0 5%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            justify-content: flex-start;
+            padding: 0 15px;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .display-toggle__button {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            background: rgba(18, 25, 40, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            min-width: 130px;
+            justify-content: center;
+            flex-shrink: 0;
+
+            @media (max-width: 768px) {
+                min-width: 120px;
+                padding: 8px 12px;
+                font-size: 12px;
+                gap: 4px;
+            }
+
+            @media (max-width: 480px) {
+                min-width: 110px;
+                padding: 8px 10px;
+                font-size: 11px;
+            }
+
+            .button-icon {
+                font-size: 14px;
+                transition: transform 0.3s ease;
+
+                @media (max-width: 768px) {
+                    font-size: 12px;
+                }
+            }
+
+            .button-text {
+                white-space: nowrap;
+            }
+
+            .button-glow {
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+                transition: left 0.5s ease;
+            }
+
+            &:hover {
+                transform: translateY(-2px);
+                border-color: rgba(30, 144, 255, 0.5);
+                box-shadow: 0 8px 25px rgba(30, 144, 255, 0.2);
+
+                .button-glow {
+                    left: 100%;
+                }
+
+                .button-icon {
+                    transform: scale(1.2);
+                }
+            }
+
+            &.active-trading {
+                background: linear-gradient(135deg, rgba(30, 144, 255, 0.25), rgba(0, 191, 255, 0.15));
+                border-color: rgba(30, 144, 255, 0.7);
+                color: #1E90FF;
+                box-shadow: 0 0 20px rgba(30, 144, 255, 0.4);
+
+                .button-icon {
+                    filter: drop-shadow(0 0 8px rgba(30, 144, 255, 0.8));
+                }
+            }
+
+            &.active-advanced {
+                background: linear-gradient(135deg, rgba(255, 107, 107, 0.25), rgba(255, 193, 7, 0.15));
+                border-color: rgba(255, 107, 107, 0.7);
+                color: #FF6B6B;
+                box-shadow: 0 0 20px rgba(255, 107, 107, 0.4);
+
+                .button-icon {
+                    filter: drop-shadow(0 0 8px rgba(255, 107, 107, 0.8));
+                }
+            }
+
+            &.active-ai {
+                background: linear-gradient(135deg, rgba(78, 205, 196, 0.25), rgba(45, 206, 137, 0.15));
+                border-color: rgba(78, 205, 196, 0.7);
+                color: #4ECDC4;
+                box-shadow: 0 0 20px rgba(78, 205, 196, 0.4);
+
+                .button-icon {
+                    filter: drop-shadow(0 0 8px rgba(78, 205, 196, 0.8));
+                }
+            }
+
+            &.active-analysis {
+                background: linear-gradient(135deg, rgba(155, 89, 182, 0.25), rgba(142, 68, 173, 0.15));
+                border-color: rgba(155, 89, 182, 0.7);
+                color: #9B59B6;
+                box-shadow: 0 0 20px rgba(155, 89, 182, 0.4);
+
+                .button-icon {
+                    filter: drop-shadow(0 0 8px rgba(155, 89, 182, 0.8));
+                }
+            }
+        }
+    }
+
+    .display-content {
+        position: relative;
+        z-index: 2;
+        width: 70%;
+        margin: 0 auto;
+        background: rgba(13, 17, 28, 0.9);
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px);
+        box-shadow: 
+            0 20px 40px rgba(0, 0, 0, 0.4),
+            0 0 80px rgba(30, 144, 255, 0.15);
+        overflow: hidden;
+        min-height: 500px;
+
+        @media (max-width: 1024px) {
+            width: 85%;
+        }
+
+        @media (max-width: 768px) {
+            width: 95%;
+            min-height: 450px;
+            border-radius: 12px;
+        }
+
+        @media (max-width: 480px) {
+            width: 98%;
+            min-height: 400px;
+            border-radius: 10px;
+        }
+
+        .iframe-container {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+
+            @media (max-width: 768px) {
+                min-height: 450px;
+            }
+
+            @media (max-width: 480px) {
+                min-height: 400px;
+            }
+
+            .content-iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+                background: transparent;
+            }
+        }
+    }
+}
+
+@keyframes grid-shift {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 50px 50px;
+    }
+}
+
+@keyframes float-particle {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) translateX(20px);
+        opacity: 0;
+    }
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        opacity: 0.1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.2;
+        transform: scale(1.1);
+    }
+}
+
+.display-container * {
+    box-sizing: border-box;
+}
+
+.display-container .enhanced-background {
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
 .display-toggle__button {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  transition: all 0.3s ease-in-out;
-  background: #f5f5f5;
-  color: #333;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  min-width: 160px; /* Fixed width for consistent buttons */
-  flex-shrink: 0; /* Prevent buttons from shrinking */
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
+    will-change: transform, box-shadow;
 }
 
-.active-protool {
-  background: linear-gradient(135deg, #28a745, #8fd19e);
-  color: white !important;
-}
-
-.active-advanced {
-  background: linear-gradient(135deg, #ffcc00, #ffdd55);
-  color: #333 !important;
-}
-
-.active-ai {
-  background: linear-gradient(135deg, #9b59b6, #8e44ad);
-  color: white !important;
-}
-
-.active-analysis {
-  background: linear-gradient(135deg, #007bff, #5a9aff);
-  color: white !important;
-}
-
-.display-content {
-  padding: 1rem;
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  height: 70vh; /* Fixed 70% of viewport height */
-  min-height: 500px; /* Minimum height for smaller screens */
-  overflow: hidden; /* No scrolling - content must fit */
-}
-
-/* Iframe container styling */
-.iframe-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
-.content-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 8px;
-}
-
-/* Ensure TradingHubDisplay and AdvancedDisplay also fit the container */
-.display-content > * {
-  width: 100%;
-  height: 100%;
-  overflow: auto; /* Allow internal scrolling if needed */
-}
-
-/* Mobile responsiveness */
 @media (max-width: 768px) {
-  .display-container {
-    padding: 0 10px;
-    margin: 10px auto;
-  }
-  
-  .display-toggle {
-    gap: 0.5rem;
-    justify-content: flex-start; /* Keep buttons in single row */
-    padding-bottom: 8px;
-  }
-  
-  .display-toggle__button {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-    min-width: 140px; /* Slightly smaller but still in one row */
-  }
-  
-  .display-content {
-    height: 70vh;
-    min-height: 400px;
-    padding: 0.5rem;
-  }
+    .display-container {
+        padding: 10px 0;
+
+        .enhanced-background {
+            .corner-glow {
+                width: 200px;
+                height: 200px;
+                
+                &--tl, &--tr {
+                    top: -100px;
+                }
+                &--bl, &--br {
+                    bottom: -100px;
+                }
+                &--tl, &--bl {
+                    left: -100px;
+                }
+                &--tr, &--br {
+                    right: -100px;
+                }
+            }
+            
+            .floating-particles .particle {
+                width: 3px;
+                height: 3px;
+            }
+        }
+    }
 }
 
 @media (max-width: 480px) {
-  .display-toggle {
-    gap: 0.4rem;
-    /* REMOVED flex-direction: column and align-items: center */
-    /* Buttons will stay in single row with horizontal scroll */
-  }
-  
-  .display-toggle__button {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.85rem;
-    min-width: 120px; /* Even smaller for mobile, but still in one row */
-    /* REMOVED width: 100% and max-width: 300px */
-  }
-  
-  .display-content {
-    height: 70vh;
-    min-height: 350px;
-  }
+    .display-container {
+        padding: 8px 0;
+        
+        .display-toggle {
+            margin-bottom: 10px;
+            padding: 0 10px;
+        }
+    }
 }
 
-/* Extra small devices */
-@media (max-width: 360px) {
-  .display-toggle__button {
-    min-width: 110px;
-    padding: 0.4rem 0.7rem;
-    font-size: 0.8rem;
-  }
+@media (min-width: 1920px) {
+    .display-container {
+        .display-content {
+            width: 65%;
+            max-width: 1400px;
+        }
+    }
+}
+
+.display-container {
+    position: relative !important;
+    overflow: visible;
+    z-index: 1;
+}
+
+.display-container * {
+    z-index: 10;
+}
+
+.enhanced-background {
+    z-index: -1 !important;
+    pointer-events: none;
+}
+
+.display-content,
+.display-toggle {
+    z-index: auto;
+    position: relative;
+}
+
+.content-iframe {
+    z-index: auto;
+    position: relative;
 }

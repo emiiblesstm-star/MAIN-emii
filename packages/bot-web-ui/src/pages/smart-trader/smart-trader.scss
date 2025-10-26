@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     background: #1a1a2e;
-    color: white;
+    color: #fff;
     overflow: hidden;
     overflow-y: auto;
 
@@ -17,7 +17,7 @@
         h1 {
             font-size: 2rem;
             font-weight: bold;
-            color: white;
+            color: #fff;
             text-shadow: 
                 0 1px 0 #ccc,
                 0 2px 0 #c9c9c9,
@@ -177,7 +177,7 @@
             background: #2a2a3e;
             border: 1px solid #555;
             border-radius: 0.45rem;
-            color: white;
+            color: #fff;
             padding: 0.6rem 0.75rem;
             height: 28.5px;
             width: 100%;
@@ -279,7 +279,7 @@
         font-weight: 800;
         font-size: 1.05rem;
         letter-spacing: .375px;
-        color: white;
+        color: #fff;
         box-shadow: 0 1.5px 0 rgba(0,0,0,.12), inset 0 0 0 1.5px rgba(255,255,255,.03);
         transition: background .2s ease, border-color .2s ease, transform .08s ease, box-shadow .2s ease;
 
@@ -299,7 +299,7 @@
             border-radius: 3.75px;
             border-width: 0.75px;
             font-size: 0.7rem !important;
-            letter-spacing: 0.1875px;
+            letter-spacing: 0.188px;
         }
     }
 
@@ -321,13 +321,13 @@
         }
     }
 
-    .text-xs { font-size: 0.5625rem; color: white; }
-    .text-sm { font-size: 0.65625rem; color: white; }
-    .text-base { font-size: 0.75rem; color: white; }
+    .text-xs { font-size: 0.563rem; color: #fff; }
+    .text-sm { font-size: 0.656rem; color: #fff; }
+    .text-base { font-size: 0.75rem; color: #fff; }
     .text-general { color: #ccc; }
-    .text-prominent { color: white; }
+    .text-prominent { color: #fff; }
     .text-loss-danger { color: #ff6b6b; }
-    .text-default { color: white; }
+    .text-default { color: #fff; }
 }
 
 @media (max-width: 430px) {
@@ -348,7 +348,6 @@
     }
 }
 
-/* ---------------- Circles UI ---------------- */
 .st-circles-wrapper { 
     width: 100%; 
 }
@@ -369,7 +368,6 @@
     }
 }
 
-/* Fixed triangle cursor - single red triangle below circles */
 .st-circles__indicator {
     position: absolute;
     bottom: 8px;
@@ -390,7 +388,6 @@
     }
 }
 
-/* each circle */
 .st-circle {
     flex: 1 1 0;
     display: flex;
@@ -411,20 +408,18 @@
     }
 }
 
-/* background ring */
 .st-circle__bg { 
     stroke: rgba(100,100,100,0.2); 
     stroke-width: 4; 
     fill: none; 
 }
 
-/* progress ring */
 .st-circle__progress { 
     stroke-linecap: round; 
     transition: stroke-dasharray 260ms ease, stroke 260ms ease; 
+    filter: drop-shadow(0 3px 4.5px rgba(0,0,0,0.06)); 
 }
 
-/* Fixed label positioning and colors for visibility */
 .st-circle__label {
     position: absolute;
     top: 50%;
@@ -441,7 +436,7 @@
 .st-circle__digit { 
     font-weight: bold; 
     font-size: clamp(18px, 3vw, 24px);
-    color: white;
+    color: #fff;
     line-height: 1;
     margin-bottom: 2px;
     
@@ -472,10 +467,6 @@
     --st-red: #f43f5e; 
 }
 
-.st-circle__progress { 
-    filter: drop-shadow(0 3px 4.5px rgba(0,0,0,0.06)); 
-}
-
 table { 
     width: 100%; 
     border-collapse: collapse; 
@@ -484,7 +475,7 @@ table {
         padding: 4.5px 6px; 
         text-align: left; 
         font-size: 0.675rem; 
-        color: white;
+        color: #fff;
         border-bottom: 1px solid #444;
     }
     
@@ -496,7 +487,7 @@ table {
     select, input {
         background: #2a2a3e;
         border: 1px solid #555;
-        color: white;
+        color: #fff;
         border-radius: 4px;
         padding: 2px 4px;
         font-size: 0.6rem;
@@ -510,7 +501,7 @@ table {
     
     button {
         background: #ef4444;
-        color: white;
+        color: #fff;
         border: none;
         border-radius: 4px;
         padding: 2px 6px;
@@ -524,7 +515,6 @@ table {
     }
 }
 
-/* Mobile-specific compact layouts */
 @media (max-width: 430px) {
     .smart-trader__row--compact {
         .smart-trader__field {
@@ -546,7 +536,6 @@ table {
     }
 }
 
-/* Ensure all compact rows stay in one line on mobile */
 .smart-trader__row--compact {
     @media (max-width: 430px) {
         display: grid !important;

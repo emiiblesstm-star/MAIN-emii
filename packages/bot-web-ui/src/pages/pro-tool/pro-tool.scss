@@ -1,7 +1,7 @@
 /* Optimized SCSS with dark theme and performance improvements */
 
 .pro-trader {
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial';
   padding: 1rem;
   color: #e2e8f0;
   width: 100%;
@@ -25,13 +25,11 @@
     max-width: 980px; 
   }
 
-  /* Enhanced scrollable container */
   &.scrollable-container {
     height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
     
-    /* Custom scrollbar styling */
     &::-webkit-scrollbar {
       width: 8px;
     }
@@ -54,7 +52,6 @@
   h1 { margin: 0.5rem 0 0.75rem 0; font-size: 1.25rem; font-weight: 600; }
 }
 
-/* top controls: volatility select + top buttons on same row */
 .top-controls {
   display: flex;
   gap: 12px;
@@ -85,7 +82,6 @@
     }
   }
 
-  /* Auto-switch button styling */
   .auto-switch-control {
     display: flex;
     align-items: center;
@@ -114,7 +110,6 @@
   }
 }
 
-/* Desktop layout - all sections in one row */
 @media (min-width: 1200px) {
   .pro-trader.one-column {
     max-width: 100%;
@@ -166,7 +161,6 @@
   }
 }
 
-/* circles & layout */
 .circles-section {
   display: flex;
   flex-direction: column;
@@ -237,7 +231,6 @@
   }
 }
 
-/* New circles buttons section */
 .circles-buttons {
   display: flex;
   gap: 12px;
@@ -299,7 +292,6 @@
   }
 }
 
-// Responsive design for mobile - CHANGED: Keep buttons in one row on mobile
 @media (max-width: 768px) {
   .circles-buttons {
     flex-direction: row;
@@ -410,7 +402,6 @@
   }
 }
 
-/* Enhanced TP/SL section with martingale and UPDATED jet mode */
 .tp-sl-section {
   display: flex;
   gap: 0.8rem;
@@ -450,7 +441,6 @@
 
   .compact { max-width: 180px; min-width: 120px; }
 
-  /* UPDATED: Jet Mode box styling */
   .jet-mode-box {
     border: 2px solid;
     border-radius: 8px;
@@ -464,7 +454,7 @@
       
       .jet-toggle-btn {
         background: #ef4444;
-        color: white;
+        color: #fff;
       }
       
       .jet-mode-info {
@@ -479,7 +469,7 @@
       
       .jet-toggle-btn {
         background: #10b981;
-        color: white;
+        color: #fff;
       }
       
       .jet-mode-info {
@@ -515,7 +505,6 @@
   }
 }
 
-/* Recovery mode section styling */
 .recovery-section {
   background: rgba(254, 243, 199, 0.05);
   border: 1px solid #fbbf24;
@@ -543,7 +532,7 @@
       cursor: pointer;
       transition: all 0.2s ease;
       background: #ef4444;
-      color: white;
+      color: #fff;
       
       &.active {
         background: #10b981;
@@ -602,7 +591,6 @@
   margin-top: 0.4rem;
 }
 
-/* NEW: Boxed radio group styling for trade type selection */
 .radio-group-boxed {
   display: flex;
   gap: 8px;
@@ -647,7 +635,6 @@
   }
 }
 
-/* trade card + dropdown styling */
 .trade-card {
   background: rgba(30, 41, 59, 0.8);
   border-radius: 10px;
@@ -776,7 +763,6 @@
   }
 }
 
-/* Jet Mode status colors */
 .jet-mode-on {
   color: #ef4444 !important;
   font-weight: 600;
@@ -787,7 +773,6 @@
   font-weight: 600;
 }
 
-/* Header styles */
 .pro-trader__header {
   display: flex;
   justify-content: space-between;
@@ -842,7 +827,6 @@
   }
 }
 
-/* Content grid */
 .pro-trader__content {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -853,17 +837,6 @@
   }
 }
 
-.pro-trader__panel {
-  &--config {
-    // Left panel styles
-  }
-  
-  &--chart {
-    // Right panel styles
-  }
-}
-
-/* Status display */
 .pro-trader__status {
   background: rgba(30, 41, 59, 0.8);
   border-radius: 8px;
@@ -904,7 +877,6 @@
   }
 }
 
-/* responsive: on mobile force TP and SL on same line and reduce sizes */
 @media (max-width: 520px) {
   .circles-grid { 
     grid-template-columns: repeat(5, minmax(44px, 1fr)); 
@@ -939,7 +911,6 @@
     grid-template-columns: 1fr;
   }
   
-  /* Mobile adjustments for Over/Under stats */
   .over-under-stats {
     .digit-stats-row {
       gap: 4px !important;
@@ -958,7 +929,6 @@
     }
   }
   
-  /* Mobile adjustments for radio group boxes */
   .radio-group-boxed {
     flex-direction: row;
     gap: 6px;
@@ -971,7 +941,6 @@
   }
 }
 
-/* appended minimal styles for history row and pills */
 .history-block {
   display: flex;
   flex-direction: column;
@@ -985,7 +954,6 @@
   padding: 0 8px;
   box-sizing: border-box;
   
-  /* Special styling for Over/Under stats */
   &.over-under-stats {
     bottom: 5px;
     gap: 6px;
@@ -1012,7 +980,7 @@
   justify-content: center;
   font-weight: 700;
   font-size: 14px;
-  color: #ffffff;
+  color: #fff;
   flex: 0 0 auto;
   padding: 0 8px;
 }
@@ -1041,7 +1009,6 @@
   align-items: baseline;
 }
 
-/* New Over/Under digit statistics styling */
 .over-under-container {
   display: flex;
   flex-direction: column;
@@ -1119,7 +1086,6 @@
   }
 }
 
-/* Content grid for desktop layout */
 .content-grid {
   display: flex;
   flex-direction: column;
