@@ -31,9 +31,9 @@ import {
   generateDerivApiInstance,
   V2GetActiveClientId,
   V2GetActiveToken,
-} from "@/external/bot-skeleton/services/api/appId"
-import { tradeOptionToBuy } from "@/external/bot-skeleton/services/tradeEngine/utils/helpers"
-import { useStore } from "@/hooks/useStore"
+} from "@deriv/bot-skeleton/services/api/appId"
+import { tradeOptionToBuy } from "@deriv/bot-skeleton/services/tradeEngine/utils/helpers"
+import { useStore } from "@deriv/hooks/useStore"
 import "./dtrader.scss"
 
 // Debug logger

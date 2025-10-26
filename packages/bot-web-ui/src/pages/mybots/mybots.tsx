@@ -6,7 +6,7 @@ import { Localize, localize } from '@deriv/translations';
 import { useDBotStore } from 'Stores/useDBotStore';
 import DeleteDialog from '../dashboard/bot-list/delete-dialog';
 import RecentWorkspace from '../dashboard/bot-list/recent-workspace';
-import './mybots.scss';
+import './mybots.scss';r
 
 const DashboardBotList = observer(() => {
     const { load_modal, dashboard } = useDBotStore();

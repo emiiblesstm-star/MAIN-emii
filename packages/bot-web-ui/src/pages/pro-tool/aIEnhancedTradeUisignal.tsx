@@ -7,8 +7,8 @@ import {
   generateDerivApiInstance,
   V2GetActiveClientId,
   V2GetActiveToken,
-} from "@/external/bot-skeleton/services/api/appId"
-import { useStore } from "@/hooks/useStore"
+} from "@deriv/bot-skeleton/services/api/appId"
+import { useStore } from "@deriv/hooks/useStore"
 import "./aIEnhancedTradeUisignal.scss"
 
 // AI Signal Types

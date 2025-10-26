@@ -8,9 +8,9 @@ import {
   generateDerivApiInstance,
   V2GetActiveClientId,
   V2GetActiveToken,
-} from "@/external/bot-skeleton/services/api/appId"
+} from "@deriv/external/bot-skeleton/services/api/appId"
 import { contract_stages } from "@/constants/contract-stage"
-import { useStore } from "@/hooks/useStore"
+import { useStore } from "@deriv/hooks/useStore"
 import "./smart-trader.scss"
 
 // Minimal trade types we will support initially
