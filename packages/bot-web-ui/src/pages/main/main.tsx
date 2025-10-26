@@ -28,10 +28,10 @@ import { FaChartBar, FaChartLine, FaPuzzlePiece, FaChessKnight, FaUsers, FaShiel
 import { MdSchema, MdGridOn } from 'react-icons/md';
 
 
-import Dtraders from '@/pages/dtraders/dtrader.tsx';
-import Advancedtools from '@/pages/advancedtools/advancedtools.tsx';
+import Dtraders from './dtraders/dtrader.tsx';
+import Advancedtools from './advancedtools/advancedtools.tsx';
 import './main.scss';
-import DisplayToggle from "@/components/trading-hub/display-toggle"   // ✅ Auto Trading UI
+import DisplayToggle from "./trading-hub/display-toggle"   // ✅ Auto Trading UI
 
 const ChartWrapper = lazy(() => import('../chart/chart-wrapper'));
 
