@@ -33,7 +33,7 @@ import {
   V2GetActiveToken,
 } from "@deriv/bot-skeleton/services/api/appId"
 import { tradeOptionToBuy } from "@deriv/bot-skeleton/services/tradeEngine/utils/helpers"
-import { useStore } from "@deriv/hooks/useStore"
+import { useStore } from "@deriv/useStore"
 import "./dtrader.scss"
 
 // Debug logger

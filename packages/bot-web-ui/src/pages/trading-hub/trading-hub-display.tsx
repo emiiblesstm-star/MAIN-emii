@@ -3,8 +3,8 @@ import './trading-hub-display.scss';
 import { api_base } from '@deriv/bot-skeleton/services/api/api-base';
 import { doUntilDone } from '@deriv/bot-skeleton/services/tradeEngine/utils/helpers';
 import { observer as globalObserver } from '@deriv/bot-skeleton/utils/observer';
-import { useStore } from '@deriv/hooks/useStore';
-import useThemeSwitcher from '@deriv/hooks/useThemeSwitcher';
+import { useStore } from '@deriv/useStore';
+import useThemeSwitcher from '@deriv/useThemeSwitcher';
 import marketAnalyzer, { TradeRecommendation } from '../../services/market-analyzer';
 
 const TradingHubDisplay: React.FC = () => {
