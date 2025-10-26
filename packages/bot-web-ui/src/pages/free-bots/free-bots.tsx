@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '@/hooks/useStore';
+import { useStore } from '@deriv/stores';
 import { LabelPairedFileArrowDownCaptionRegularIcon } from '@deriv/quill-icons/LabelPaired';
 import { LabelPairedMoonCaptionRegularIcon } from '@deriv/quill-icons/LabelPaired';
 import { LabelPairedExclamationCaptionRegularIcon } from '@deriv/quill-icons/LabelPaired';
